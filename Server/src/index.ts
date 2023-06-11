@@ -41,7 +41,7 @@ app.get("/words", (req: Request, res: Response) => {
 app.post("/rank", (req: Request, res: Response) => {
 	const scoresList = TestData.scoresList;
 	// deconstruct score from body and cast it as int
-	const { int: score } = req.body;
+	const { score }: { score: number } = req.body;
 	// init counter
 	let lowerThanScoreCount = 0;
 
@@ -53,13 +53,13 @@ app.post("/rank", (req: Request, res: Response) => {
 	}
 
 	// calculate rank percent
-	let rankPercent = lowerThanScoreCount / scoresList.length;
+	let rankPercent = (lowerThanScoreCount / scoresList.length) * 100;
 	// round rank percent to nearest hundreth
 	rankPercent = Math.ceil(rankPercent * 100) / 100;
 
 	//respond with OK and the rank percent
 	res.status(200);
-	res.send(rankPercent).end();
+	res.send({ rankPercent }).end();
 });
 
 app.listen(port, () => {

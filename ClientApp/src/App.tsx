@@ -3,8 +3,6 @@ import Home from "./Pages/Home";
 import LeaderBoard from "./Pages/LeaderBoard";
 import Loading from "./Components/Loading/Loading";
 import Play from "./Pages/Play";
-import { useEffect, useState } from "react";
-import PlayerScore from "./Types/PlayerScore";
 
 const router = createBrowserRouter([
 	{

@@ -16,7 +16,7 @@ const Playscreen: FC<PlayscreenInterface> = ({ score, setScore, solvedCount, set
 
 	const choose = (type: string) => {
 		if (type == wordsList[solvedCount].pos) {
-			setScore(score + 1);
+			setScore(score + 10);
 			setHistory([...history, true]);
 			setSolvedCount(solvedCount + 1);
 		} else {
@@ -40,12 +40,12 @@ const Playscreen: FC<PlayscreenInterface> = ({ score, setScore, solvedCount, set
 		<>
 			<div className="w-full flex items-center justify-center">
 				<div
-					className=" border border-black rounded-xl md:mt-0 mt-20 md:w-1/4 w-1/2 flex p-4 justify-center items-center"
+					className=" border border-black rounded-xl md:mt-0 mt-20 md:w-1/4 w-2/3 flex p-4 justify-center items-center"
 					style={{ aspectRatio: "2/1", backgroundColor: "#f9f9f9" }}>
-					<p className="md:text-6xl text-4xl">{wordsList[solvedCount]?.word}</p>
+					<p className="xl:text-6xl text-4xl ">{wordsList[solvedCount]?.word}</p>
 				</div>
 			</div>
-			<p className="text-2xl self-center mt-2">{`${solvedCount}/10`}</p>
+			<p className="text-2xl self-center mt-2">{`${(solvedCount / 10) * 100}%`}</p>
 			<div className="flex flex-col justify-center items-center mt-4 gap-4">
 				<p className="text-xl h-7">
 					{...history.map((con) => {
