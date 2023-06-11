@@ -1,10 +1,13 @@
 "use strict";
 
 import express, { Express, Request, Response } from "express";
+import cors from "cors";
 import TestData from "./TestData.json";
 
 const app: Express = express();
 const port = 8080;
+app.use(express.json());
+app.use(cors({ credentials: true, origin: true }));
 
 // helper function to select a random element from an array
 const getRandomWord = (array: Array<any>) => {
