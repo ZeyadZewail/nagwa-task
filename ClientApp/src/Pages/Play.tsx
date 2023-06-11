@@ -66,6 +66,12 @@ const Play = () => {
 
 	const saveScore = () => {
 		if (name === "") {
+			setError("Please enter a name.");
+			return;
+		}
+
+		if (name.length > 7) {
+			setError("Name cannot be longer than 7 characters.");
 			return;
 		}
 
@@ -99,17 +105,20 @@ const Play = () => {
 						Rank {rank === -1 ? <Spinner size={30} /> : `${rank}%`}
 					</div>
 					<p className="md:text-4xl text-2xl">Enter your name:</p>
-					<div className="flex w-full flex-wrap items-center justify-center gap-4">
-						<input
-							value={name}
-							onChange={(e) => {
-								setName(e.target.value);
-							}}
-							className="lg:w-1/6 h-10 p-2 text-primary border-2 border-black rounded-md"
-						/>
-						<button onClick={saveScore} className="rounded-md bg-primary-button py-2 px-2">
-							Submit Score
-						</button>
+					<div className="w-full flex flex-col">
+						<p className="h-8 self-center text-red-600">{error ? error : null}</p>
+						<div className="flex w-full flex-wrap items-center justify-center gap-4">
+							<input
+								value={name}
+								onChange={(e) => {
+									setName(e.target.value);
+								}}
+								className="lg:w-1/6 h-10 p-2 text-primary border-2 border-black rounded-md"
+							/>
+							<button onClick={saveScore} className="rounded-md bg-primary-button py-2 px-2">
+								Submit Score
+							</button>
+						</div>
 					</div>
 				</div>
 			)}
