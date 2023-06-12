@@ -84,7 +84,7 @@ const Play = () => {
 	 * leaderboard cookie, but it does not have a return statement. Instead, it navigates to the
 	 * leaderboard page using the `navigate` function.
 	 */
-	const saveScore = () => {
+	const saveScore = (tryAgain: boolean) => {
 		if (name === "") {
 			setError("Please enter a name.");
 			return;
@@ -104,7 +104,8 @@ const Play = () => {
 		} else {
 			Cookies.set("LeaderBoard", JSON.stringify([newScore]));
 		}
-		navigate("/leaderboard");
+
+		tryAgain ? location.reload() : navigate("/leaderboard");
 	};
 
 	return (
@@ -120,7 +121,7 @@ const Play = () => {
 				/>
 			) : (
 				<div className="flex flex-col flex-grow justify-start items-center gap-10 mt-40">
-					<p className="md:text-6xl text-4xl">{`You scored ${score}/100!`}</p>
+					<p className="md:text-6xl text-4xl text-center">{`You scored ${score}/100!`}</p>
 					<div className="md:text-6xl text-4xl flex gap-6 h-fit items-center justify-center">
 						Rank {rank === -1 ? <Spinner size={30} /> : `${rank}%`}
 					</div>
@@ -133,11 +134,16 @@ const Play = () => {
 								onChange={(e) => {
 									setName(e.target.value);
 								}}
-								className="lg:w-1/6 h-10 p-2 text-primary border-2 border-black rounded-md"
+								className="lg:w-1/6  h-10 p-2 text-primary border-2 border-black rounded-md"
 							/>
-							<button onClick={saveScore} className="rounded-md bg-primary-button py-2 px-2">
-								Submit Score
-							</button>
+							<div className="flex items-center justify-center gap-4">
+								<button onClick={() => saveScore(true)} className="rounded-md bg-primary-button py-2 px-2">
+									Submit & Try again
+								</button>
+								<button onClick={() => saveScore(false)} className="rounded-md bg-primary-button py-2 px-2">
+									Submit
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
