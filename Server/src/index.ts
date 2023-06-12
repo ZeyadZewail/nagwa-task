@@ -18,11 +18,6 @@ const getRandomWord = (array: Array<any>) => {
 	return array[randomIndex];
 };
 
-//static file serving
-app.get("/", (req: Request, res: Response) => {
-	res.sendFile(path.join(__dirname, "..", "../ClientApp", "dist", "index.html"));
-});
-
 app.get("/words", (req: Request, res: Response) => {
 	const wordList = TestData.wordList;
 	// filter words by part of speech (pos)
@@ -68,6 +63,10 @@ app.post("/rank", (req: Request, res: Response) => {
 	//respond with OK and the rank percent
 	res.status(200);
 	res.send({ rankPercent }).end();
+});
+
+app.use("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "..", "../ClientApp", "dist", "index.html"));
 });
 
 app.listen(port, () => {
