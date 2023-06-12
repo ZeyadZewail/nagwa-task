@@ -1,6 +1,9 @@
 name: Deploy to fly
 run-name: Deploying 🚀
-on: workflow_dispatch
+on:
+  push:
+    branches: [main]
+
 jobs:
   Deploy:
     runs-on: ubuntu-latest
