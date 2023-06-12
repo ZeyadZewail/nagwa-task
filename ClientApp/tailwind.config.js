@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import theme from "./src/constants/theme.ts";
+import theme from "./src/Constants/theme.ts";
 
 export default {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],

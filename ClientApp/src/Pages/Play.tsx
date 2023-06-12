@@ -9,6 +9,8 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../Components/Spinner/Spinner";
 
+const api = import.meta.env.VITE_API ?? "";
+
 const Play = () => {
 	const [wordsList, setWordsList] = useState<WordElement[]>([]);
 	const [loading, setLoading] = useState(true);
@@ -20,10 +22,16 @@ const Play = () => {
 
 	const navigate = useNavigate();
 
+	/* This `useEffect` hook is fetching a list of words from a server using a GET request to
+	`http://localhost:8080/words`. It then updates the state with the response data using
+	`setWordsList(responseData)` and sets `loading` to `false` using `setLoading(false)`. If there is
+	an error with the request, it sets the `error` state to "Cannot Reach Server" using
+	`setError("Cannot Reach Server")`. This effect runs only once, on component mount, because the
+	dependency array `[]` is empty. */
 	useEffect(() => {
 		const getWords = async () => {
 			try {
-				const response = await fetch("http://localhost:8080/words", { method: "GET" });
+				const response = await fetch(`${api}/words`, { method: "GET" });
 				const responseData = await response.json();
 
 				if (response.ok) {
@@ -39,9 +47,13 @@ const Play = () => {
 		getWords();
 	}, []);
 
+	/**
+	 * This function sends a POST request to a server to retrieve the rank percentage based on a given
+	 * score and updates the state accordingly.
+	 */
 	const getRank = async () => {
 		try {
-			const response = await fetch("http://localhost:8080/rank", {
+			const response = await fetch(`${api}/rank`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -64,6 +76,14 @@ const Play = () => {
 		}
 	}, [solvedCount]);
 
+	/**
+	 * The function saves a player's score and name to a leaderboard, with error handling for invalid
+	 * inputs.
+	 * @returns The function `saveScore` returns nothing (i.e., `undefined`). It performs some operations
+	 * such as checking if the name is valid, creating a new player score object, and saving it to a
+	 * leaderboard cookie, but it does not have a return statement. Instead, it navigates to the
+	 * leaderboard page using the `navigate` function.
+	 */
 	const saveScore = () => {
 		if (name === "") {
 			setError("Please enter a name.");

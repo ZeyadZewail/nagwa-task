@@ -10,6 +10,11 @@ const LeaderBoard = () => {
 	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
 
+	/* This `useEffect` hook is used to fetch the leaderboard data from the browser's cookies and update
+	the state variables `scores` and `loading`. It runs only once when the component mounts, as the
+	second argument is an empty array `[]`. If there is a cookie named "LeaderBoard", it parses the
+	cookie data and sets the `scores` state variable to the parsed data. Then it sets the `loading`
+	state variable to `false` to indicate that the data has been loaded. */
 	useEffect(() => {
 		const cookie = Cookies.get("LeaderBoard");
 		if (cookie) {
@@ -40,7 +45,7 @@ const LeaderBoard = () => {
 					</li>
 				</div>
 				<div className="w-full flex items-center justify-center">
-					<button className="py-2 px-4 bg-primary-button text-6xl rounded-3xl" onClick={navToHome}>
+					<button className="py-2 px-4 bg-primary-button text-5xl rounded-3xl" onClick={navToHome}>
 						Home
 					</button>
 				</div>

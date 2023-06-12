@@ -14,6 +14,13 @@ interface PlayscreenInterface {
 const Playscreen: FC<PlayscreenInterface> = ({ score, setScore, solvedCount, setSolvedCount, wordsList }) => {
 	const [history, setHistory] = useState<boolean[]>([]);
 
+	/**
+	 * The function "choose" checks if the input type matches a certain value and updates the score,
+	 * history, and solved count accordingly.
+	 * @param {string} type - The parameter `type` is a string that represents the user's choice for a
+	 * particular game. It is compared with the `pos` property of an object in the `wordsList` array to
+	 * determine if the user's choice is correct or not.
+	 */
 	const choose = (type: string) => {
 		if (type == wordsList[solvedCount].pos) {
 			setScore(score + 10);
@@ -25,6 +32,13 @@ const Playscreen: FC<PlayscreenInterface> = ({ score, setScore, solvedCount, set
 		}
 	};
 
+	/* `optionButtons` is a variable that contains an array of buttons, where each button represents a type
+	of word (adverb, verb, noun, or adjective) that the user can choose from. The `map` function is used
+	to iterate over the `types` array and create a button for each type. The `onClick` function of each
+	button calls the `choose` function with the corresponding type as an argument. The `key` property is
+	used to give each button a unique identifier, and the `className` property is used to apply styling
+	to the button. The text inside each button is the type of word, and its size and color are
+	determined by the CSS classes applied to it. */
 	const optionButtons = types.map((type) => (
 		<button
 			onClick={() => {

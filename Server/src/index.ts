@@ -3,17 +3,25 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import TestData from "./TestData.json";
+import path from "path";
 
 const app: Express = express();
 const port = 8080;
 app.use(express.json());
 app.use(cors({ credentials: true, origin: true }));
+app.use(express.static(path.join(__dirname, "..", "../ClientApp", "dist")));
+app.use(express.static("public"));
 
 // helper function to select a random element from an array
 const getRandomWord = (array: Array<any>) => {
 	const randomIndex = Math.floor(Math.random() * array.length);
 	return array[randomIndex];
 };
+
+//static file serving
+app.get("/", (req: Request, res: Response) => {
+	res.sendFile(path.join(__dirname, "..", "../ClientApp", "dist", "index.html"));
+});
 
 app.get("/words", (req: Request, res: Response) => {
 	const wordList = TestData.wordList;
