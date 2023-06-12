@@ -1,5 +1,6 @@
 FROM node:lts
 EXPOSE 8080
+RUN apt-get -y update
 
 WORKDIR /root
 COPY ./ ./
