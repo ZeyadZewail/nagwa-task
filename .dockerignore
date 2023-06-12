@@ -40,7 +40,7 @@ ClientApp\**\*.local
 
 # Editor directories and files
 ClientApp\**\.vscode\*
-!ClientApp\**\.vscode\extensions.json
+ClientApp\**\.vscode\extensions.json
 ClientApp\**\.idea
 ClientApp\**\.DS_Store
 ClientApp\**\*.suo
