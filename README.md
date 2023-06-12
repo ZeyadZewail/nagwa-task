@@ -10,21 +10,21 @@ a web game called "Guess the place of speech" where you get 10 random words and 
 
 Done for Nagwa company as a interview task.
 
-# Run Locally
+# Run Locally (dev)
 
 Client
 ```
 cd ClientApp
-npm run build
+npm run dev
 ```
 
 Server
 ```
 cd server
-npm start
+npm run dev
 ```
 
-then visit http://localhost:8080/
+then visit http://localhost:5173/
 
 # Run with docker
 
