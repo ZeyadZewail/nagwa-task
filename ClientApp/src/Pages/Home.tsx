@@ -6,7 +6,7 @@ const Home = () => {
 	return (
 		<>
 			<div className="flex items-center justify-center">
-				<img className="xl:w-1/4 lg:w-1/3 md:w-1/2 w-4/5" alt="logo" src={logo} />
+				<img className="xl:w-1/5 lg:w-1/3 md:w-1/2 w-4/5" alt="logo" src={logo} />
 			</div>
 			<div className="w-full flex flex-col items-center justify-center mb-10 gap-10 flex-grow">
 				<MenuButton text={"play"} link={"/play"} />
